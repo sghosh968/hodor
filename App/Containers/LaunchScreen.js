@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, Button } from 'react-native'
-import { Images } from '../Themes'
+import React, { Component } from 'react';
+import { ScrollView, Text, Image, View } from 'react-native';
+import { Images } from '../Themes';
+import { Button } from 'react-native-elements';
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
