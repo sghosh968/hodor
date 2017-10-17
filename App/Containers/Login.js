@@ -5,29 +5,29 @@ import { Images } from '../Themes'
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
-export default class LaunchScreen extends Component {
+export default class Login extends Component {
   render () {
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
-            <Image source={Images.launch} style={styles.logo} />
-          </View>
-
-          <View style={styles.section} >
-            <Image source={Images.ready} />
             <Text style={styles.sectionText}>
-              App Launch Screen
+              Login
             </Text>
             <Button
-              onPress={() => navigate('MainLoginScreen')}
+              onPress={() => navigate('EmailLogin')}
               title="Login"
             />
-
+            <Button
+              onPress={() => navigate('MainLoginScreen')}
+              title="Login with Google"
+            />
+            <Button
+              onPress={() => navigate('MainLoginScreen')}
+              title="Login with Facebook"
+            />
           </View>
-
         </ScrollView>
       </View>
     )
