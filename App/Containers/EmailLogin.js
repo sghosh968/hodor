@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Image, View } from 'react-native';
+import { ScrollView, Text, Image, View, Alert } from 'react-native';
 import { Images } from '../Themes';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import CookieManager from 'react-native-cookies';
@@ -47,7 +47,14 @@ export default class EmailLogin extends Component {
         navigate('DashboardScreen');
       } else {
         var errorResponse = JSON.parse(response._bodyInit);
-        console.log(errorResponse.message);
+        Alert.alert(
+          'Error Logging in!',
+          errorResponse.message,
+          [
+            {text: 'OK'},
+          ],
+          { cancelable: true }
+        );
       }
     })
     .catch((error) => {
