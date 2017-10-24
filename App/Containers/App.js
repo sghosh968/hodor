@@ -5,8 +5,11 @@ import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
 
+
 // create our store
 const store = createStore()
+console.log(store.getState());
+debugger;
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js

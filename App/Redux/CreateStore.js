@@ -18,9 +18,9 @@ export default (rootReducer, rootSaga) => {
 
   /* ------------- Saga Middleware ------------- */
 
-  const sagaMonitor = Config.useReactotron ? console.tron.createSagaMonitor() : null
-  const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
-  middleware.push(sagaMiddleware)
+  // const sagaMonitor = Config.useReactotron ? console.tron.createSagaMonitor() : null
+  // const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
+  // middleware.push(sagaMiddleware)
 
   /* ------------- Assemble Middleware ------------- */
 
@@ -38,16 +38,16 @@ export default (rootReducer, rootSaga) => {
   const store = createAppropriateStore(rootReducer, compose(...enhancers))
 
   // configure persistStore and check reducer version number
-  if (ReduxPersist.active) {
-    RehydrationServices.updateReducers(store)
-  }
+  // if (ReduxPersist.active) {
+  //   RehydrationServices.updateReducers(store)
+  // }
 
   // kick off root saga
-  let sagasManager = sagaMiddleware.run(rootSaga)
+  // let sagasManager = sagaMiddleware.run(rootSaga)
 
   return {
-    store,
-    sagasManager,
-    sagaMiddleware
+    store
+    // sagasManager,
+    // sagaMiddleware
   }
 }
