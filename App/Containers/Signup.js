@@ -46,7 +46,6 @@ export default class Signup extends Component {
       })
     })
     .then((response) => {
-      debugger;
       const { navigate } = this.props.navigation;
       if (response.status === 200) {
         CookieManager.getAll()

@@ -6,10 +6,11 @@ import RootContainer from './RootContainer'
 import createStore from '../Redux'
 
 
-// create our store
+/*
+  create our store * this invokes default function inported in Redux/index.js
+  which inturn triggers store creation in Redux/CreateStore
+*/
 const store = createStore()
-console.log(store.getState());
-debugger;
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
@@ -30,7 +31,5 @@ class App extends Component {
   }
 }
 
-// allow reactotron overlay for fast design in dev mode
-export default DebugConfig.useReactotron
-  ? console.tron.overlay(App)
-  : App
+// export root component
+export default App

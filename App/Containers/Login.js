@@ -3,8 +3,7 @@ import { ScrollView, Text, Image, View } from 'react-native';
 import { Images } from '../Themes';
 import { Button } from 'react-native-elements';
 
-// console.log(ColoredRaisedButton);
-// debugger;
+
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
