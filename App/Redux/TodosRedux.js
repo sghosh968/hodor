@@ -1,46 +1,141 @@
-import { createReducer, createActions } from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+import fetch from 'isomorphic-fetch';
 
-/* ------------- Types and Action Creators ------------- */
+/*---- Actions Types ---- */
+export const ADD_TODO = 'ADD_TODO',
+REMOVE_TODO = 'REMOVE_TODO',
+UPDATE_TODO_STATE_REQUEST = 'UPDATE_TODO_STATE_REQUEST',
+UPDATE_TODO_STATE_REQUEST_SUCCESS = 'UPDATE_TODO_STATE_REQUEST_SUCCESS',
+UPDATE_TODO_STATE_REQUEST_ERROR = 'UPDATE_TODO_STATE_REQUEST_ERROR',
+FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST',
+FETCH_TODOS_REQUEST_SUCCESS = 'FETCH_TODOS_REQUEST_SUCCESS';
+SET_FETCHING_STATUS = 'SET_FETCHING_STATUS';
 
-const { Types, Creators } = createActions({
-  userRequest: ['username'],
-  userSuccess: ['avatar'],
-  userFailure: null
-})
-
-export const GithubTypes = Types
-export default Creators
-
-/* ------------- Initial State ------------- */
-
-export const INITIAL_STATE = Immutable({
-  avatar: null,
-  fetching: null,
-  error: null,
-  username: null
-})
-
-/* ------------- Reducers ------------- */
-
-// request the avatar for a user
-export const request = (state, { username }) =>
-  state.merge({ fetching: true, username, avatar: null })
-
-// successful avatar lookup
-export const success = (state, action) => {
-  const { avatar } = action
-  return state.merge({ fetching: false, error: null, avatar })
+/*---- Actions creators ---- */
+export function addTodo(todo) {
+  return { type: ADD_TODO, todo };
 }
 
-// failed to get the avatar
-export const failure = (state) =>
-  state.merge({ fetching: false, error: true, avatar: null })
+export function removeTodo(todoID) {
+  return { type: REMOVE_TODO, todoID };
+}
 
-/* ------------- Hookup Reducers To Types ------------- */
+export function setFetchingStatus(status) {
+  return { type: SET_FETCHING_STATUS, status };
+}
 
-export const reducer = createReducer(INITIAL_STATE, {
-  [Types.USER_REQUEST]: request,
-  [Types.USER_SUCCESS]: success,
-  [Types.USER_FAILURE]: failure
-})
+export function updateTodoStateRequest(todoID, updatedState) {
+  let requestBody = {
+    todo: {
+        state: updatedState
+      }
+  };
+  return (dispatch) => {
+    return fetch(`https://hodor.dev/api/todos/${todoID}/updateTodoState`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        todo: {
+          status: updatedState
+        }
+      })
+    })
+    .then(
+      (response) => response.json(),
+      (error) => console.log('An error occured.', error)
+    )
+    .then(
+      (jsonResponse) => {
+        dispatch(updateTodoStateRequestSuccess(jsonResponse));
+      }
+    )
+    .catch((e) => {
+      console.log("Error is", e);
+    });
+  }
+}
+
+export function updateTodoStateRequestSuccess(response) {
+  return {
+    type: UPDATE_TODO_STATE_REQUEST_SUCCESS,
+    updatedTodo: response.updatedTodo
+  };
+}
+
+export function fetchTodosRequest() {
+  return (dispatch) => {
+    dispatch(setFetchingStatus(true));
+    return fetch('https://hodor.dev/api/todos')
+    .then(
+      (response) => response.json(),
+      (error) => console.log('An error occured.', error)
+    )
+    .then(
+      (jsonResponse) => {
+        dispatch(fetchTodosRequestSuccess(jsonResponse));
+        dispatch(setFetchingStatus(false));
+      }
+    )
+  }
+}
+
+export function fetchTodosRequestSuccess(response) {
+  return {
+    type: FETCH_TODOS_REQUEST_SUCCESS,
+    todos: response.todos
+  };
+}
+
+/*---- Action handlers / Reducers ---- */
+
+let initialState = {
+  todos: []
+};
+
+export function todosReducer(state = initialState, action) {
+  switch(action.type) {
+    case UPDATE_TODO_STATE_REQUEST:
+    return state;
+    case UPDATE_TODO_STATE_REQUEST_SUCCESS:
+    // let todosCopy = [ ...state.todos ],
+    // updatedTodoIndex = state.todos.findIndex((currentTodo, index) => {
+    //   if (currentTodo.id === action.updatedTodo.id)
+		//     return index;
+    // });
+    let updatedTodo = action.updatedTodo;
+    return {
+      ...state,
+      todos: state.todos.map( (todo) => {
+        if (todo.id === updatedTodo.id)
+          return updatedTodo;
+        else
+          return todo;
+      })
+    }
+    case SET_FETCHING_STATUS:
+    return {
+      ...state,
+      isFetching: action.status
+    }
+    case ADD_TODO:
+    return [
+      ...state.todos,
+      action.payload.todo
+    ]
+    case REMOVE_TODO:
+    return [
+      ...state.todos,
+      state.todos.filter( (todo) => todo.id != action.payload.todoID )
+    ]
+    case FETCH_TODOS_REQUEST:
+    return state;
+    case FETCH_TODOS_REQUEST_SUCCESS:
+    return {
+      ...state,
+      todos: action.todos
+    }
+    default:
+    return state;
+  }
+}

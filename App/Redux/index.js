@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux'
 import configureStore from './CreateStore'
+import { todosReducer } from './TodosRedux'
+
+
 
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
-  nav: require('./NavigationRedux').reducer
+  nav   : require('./NavigationRedux').reducer,
+  todosData : todosReducer
 })
 
 export default () => {
