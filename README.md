@@ -1,7 +1,7 @@
 ## Hodor app
 ##### Description (A demo app to learn React-Native and nodeJS)
 A react Native application which consumes endpoints from an expressJS API and few other 3rd party APIs.
-Find the backend API [here](https://github.com/sghosh968/hodor-api)
+Find the backend API [here](https://github.com/sghosh968/hodor-api).
 I haven't decided exact use of this application yet. For now it just CRUD for Todos with user authentication using JWT. Something really cool to be added.
 
 ##### Boilerplate code
