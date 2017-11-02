@@ -9,6 +9,7 @@ UPDATE_TODO_STATE_REQUEST_ERROR = 'UPDATE_TODO_STATE_REQUEST_ERROR',
 FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST',
 FETCH_TODOS_REQUEST_SUCCESS = 'FETCH_TODOS_REQUEST_SUCCESS';
 SET_FETCHING_STATUS = 'SET_FETCHING_STATUS';
+SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 
 /*---- Actions creators ---- */
 export function addTodo(todo) {
@@ -21,6 +22,10 @@ export function removeTodo(todoID) {
 
 export function setFetchingStatus(status) {
   return { type: SET_FETCHING_STATUS, status };
+}
+
+export function setVisibilityFilter(filter) {
+  return { type: SET_VISIBILITY_FILTER, filter };
 }
 
 export function updateTodoStateRequest(todoID, updatedState) {
@@ -90,19 +95,22 @@ export function fetchTodosRequestSuccess(response) {
 /*---- Action handlers / Reducers ---- */
 
 let initialState = {
-  todos: []
+  todos: [],
+  visibilityFilter: "all"
 };
 
 export function todosReducer(state = initialState, action) {
   switch(action.type) {
+    case SET_VISIBILITY_FILTER:
+    console.log("In reducer SET_VISIBILITY_FILTER, action is: ", action);
+    return {
+      ...state,
+      visibilityFilter: action.filter,
+    };
+    // return state;
     case UPDATE_TODO_STATE_REQUEST:
     return state;
     case UPDATE_TODO_STATE_REQUEST_SUCCESS:
-    // let todosCopy = [ ...state.todos ],
-    // updatedTodoIndex = state.todos.findIndex((currentTodo, index) => {
-    //   if (currentTodo.id === action.updatedTodo.id)
-		//     return index;
-    // });
     let updatedTodo = action.updatedTodo;
     return {
       ...state,
