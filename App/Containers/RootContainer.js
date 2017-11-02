@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { View, StatusBar } from 'react-native'
-import ReduxNavigation from '../Navigation/ReduxNavigation'
-import { connect } from 'react-redux'
-import StartupActions from '../Redux/StartupRedux'
-import ReduxPersist from '../Config/ReduxPersist'
-
+import React, { Component } from 'react';
+import { View, StatusBar } from 'react-native';
+import {Header} from 'react-native-elements';
+import ReduxNavigation from '../Navigation/ReduxNavigation';
+import { connect } from 'react-redux';
+import StartupActions from '../Redux/StartupRedux';
+import ReduxPersist from '../Config/ReduxPersist';
+import Colors from '../Themes/Colors';
 // Styles
 import styles from './Styles/RootContainerStyles'
 
@@ -21,6 +22,12 @@ class RootContainer extends Component {
       <View style={styles.applicationView}>
         <StatusBar barStyle='light-content' />
         <ReduxNavigation />
+        <Header
+          statusBarProps={{ barStyle: 'dark-content' }}
+          leftComponent={{ icon: 'menu', color: Colors.white }}
+          centerComponent={{ text: 'Hodor', style: { color: Colors.white, fontSize: 20 } }}
+          backgroundColor={Colors.c4}
+        />
       </View>
     )
   }
