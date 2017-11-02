@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {fetchTodosRequest, updateTodoStateRequest, setVisibilityFilter } from '../Redux/TodosRedux';
 import TodosList from '../Components/TodosList';
 import {Select, Option} from "react-native-chooser";
+import Colors from '../Themes/Colors';
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -21,20 +22,22 @@ class DashboardComponent extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
-          <Select
-            onSelect = { (selectedFilter) => this.props.setVisibilityFilter(selectedFilter) }
-            selected = { this.props.visibilityFilter }
-            style = {{borderWidth : 1, borderColor : "purple"}}
-            textStyle = {{}}
-            backdropStyle  = {{backgroundColor : "#d3d5d6"}}
-            optionListStyle = {{backgroundColor : "#F5FCFF"}}
-          >
-            <Option value = "all">All</Option>
-            <Option value = "complete">Completed</Option>
-            <Option value = "incomplete">Incomplete</Option>
-          </Select>
+          <View>
+            <Text> Filter Todos</Text>
+            <Select
+              onSelect = { (selectedFilter) => this.props.setVisibilityFilter(selectedFilter) }
+              selected = { this.props.visibilityFilter }
+              style = {{borderWidth : 1, borderColor : "purple"}}
+              textStyle = {{}}
+              backdropStyle  = {{backgroundColor : Colors.c1}}
+              optionListStyle = { {backgroundColor : Colors.c1} }
+            >
+              <Option value = "all">All</Option>
+              <Option value = "complete">Completed</Option>
+              <Option value = "incomplete">Incomplete</Option>
+            </Select>
+          </View>
           <TodosList todos={this.props.todos} visibilityFilter={this.props.visibilityFilter} isLoading={this.props.isFetching} updateTodoState={this.props.updateTodoState} />
         </ScrollView>
       </View>
