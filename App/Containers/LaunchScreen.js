@@ -11,16 +11,10 @@ export default class LaunchScreen extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
-          <View style={styles.centered}>
-            <Image source={Images.launch} style={styles.logo} />
-          </View>
-
           <View style={styles.section} >
-            <Image source={Images.ready} />
             <Text style={styles.sectionText}>
-              App Launch Screen
+              Hodor App
             </Text>
             <Button
               onPress={() => navigate('MainLoginScreen')}

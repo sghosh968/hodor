@@ -66,7 +66,6 @@ export default class EmailLogin extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
             <Text style={styles.sectionText}>
