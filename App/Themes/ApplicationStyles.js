@@ -28,6 +28,10 @@ const ApplicationStyles = {
       margin: Metrics.section,
       padding: Metrics.baseMargin
     },
+    div: {
+      margin: Metrics.smallMargin,
+      padding: Metrics.baseMargin
+    },
     sectionText: {
       ...Fonts.style.normal,
       paddingVertical: Metrics.doubleBaseMargin,
@@ -75,6 +79,11 @@ const ApplicationStyles = {
     borderColor: Colors.ember,
     alignItems: 'center',
     textAlign: 'center'
+  },
+  formLabel: {
+    color: Colors.c4,
+    fontSize: 16,
+    fontWeight: '400'
   }
 }
 

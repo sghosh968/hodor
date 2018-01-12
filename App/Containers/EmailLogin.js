@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, Alert } from 'react-native';
-import { Images } from '../Themes';
+import { Images, Colors } from '../Themes';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import CookieManager from 'react-native-cookies';
+import ApplicationStyles from '../Themes/ApplicationStyles';
 var _ = require('lodash');
 
 
@@ -18,8 +19,6 @@ export default class EmailLogin extends Component {
       user: {
         email: null,
         password: null
-        // email: "sghosh968@gmail.com",
-        // password: "00000000"
       }
     };
   }
@@ -71,13 +70,34 @@ export default class EmailLogin extends Component {
             <Text style={styles.sectionText}>
               Login with Email
             </Text>
-            <FormLabel>Email</FormLabel>
-            <FormInput onChangeText={(value) => this.mapFormInputToState(value, 'user.email')} />
-            <FormLabel>Password</FormLabel>
-            <FormInput onChangeText={(value) => this.mapFormInputToState(value, 'user.password')} />
+          </View>
+          <View style={styles.div} >
+            <FormLabel
+              labelStyle={ApplicationStyles.formLabel}
+            >
+              Email
+            </FormLabel>
+            <FormInput
+            onChangeText={(value) => this.mapFormInputToState(value, 'user.email')}
+            inputStyle={{color: Colors.c4}}
+            />
+          </View>
+          <View style={styles.div} >
+            <FormLabel
+              labelStyle={{color: Colors.c4, fontSize: 16, fontWeight: '400'}}
+            >
+              Password
+            </FormLabel>
+            <FormInput
+            onChangeText={(value) => this.mapFormInputToState(value, 'user.password')}
+            inputStyle={{color: Colors.c4}}
+            />
+          </View>
+          <View style={styles.div} >
             <Button
-            raised
-            icon={{name: 'keyboard-arrow-right'}}
+            icon={{name: 'sign-in', type: 'font-awesome', color: Colors.c3}}
+            textStyle={{color: Colors.c2}}
+            borderRadius={10}
             onPress={ () => this.startLogin() }
             title='Login' />
           </View>

@@ -46,6 +46,7 @@ export default class Signup extends Component {
       })
     })
     .then((response) => {
+      debugger;
       const { navigate } = this.props.navigation;
       if (response.status === 200) {
         CookieManager.getAll()
@@ -79,16 +80,25 @@ export default class Signup extends Component {
             <Text style={styles.sectionText}>
               Create Account
             </Text>
+          </View>
+          <View style={styles.div} >
             <FormLabel>Email</FormLabel>
             <FormInput onChangeText={(value) => this.mapFormInputToState(value, 'user.email')} />
+          </View>
+          <View style={styles.div} >
             <FormLabel>Password</FormLabel>
             <FormInput
             secureTextEntry={true}
             onChangeText={(value) => this.mapFormInputToState(value, 'user.password')} />
+          </View>
+          <View style={styles.div} >
             <FormLabel>First Name</FormLabel>
             <FormInput onChangeText={(value) => this.mapFormInputToState(value, 'user.firstName')} />
+          </View>
+          <View style={styles.div} >
             <FormLabel>Last Name</FormLabel>
             <FormInput onChangeText={(value) => this.mapFormInputToState(value, 'user.lastName')} />
+          </View>
             {
               // TODO add DOB field later
               // <FormLabel>Date of Birth</FormLabel>
@@ -97,7 +107,6 @@ export default class Signup extends Component {
               // mode="date"
               // onDateChange={(value) => this.mapFormInputToState(value, 'formData.user.dob')} />
             }
-
             {
               // TODO Add gender field later
               // <FormLabel>Gender</FormLabel>
@@ -106,12 +115,13 @@ export default class Signup extends Component {
               //   renderItem={({item}) => <Text>{item.key}</Text>}
               // />
             }
-            <Button
-            raised
-            icon={{name: 'keyboard-arrow-right'}}
-            onPress={ () => this.startSignup() }
-            title='Signup' />
-          </View>
+            <View style={styles.div} >
+              <Button
+              raised
+              icon={{name: 'keyboard-arrow-right'}}
+              onPress={ () => this.startSignup() }
+              title='Signup' />
+            </View>
         </ScrollView>
       </View>
     )

@@ -1,8 +1,14 @@
 import { ListItem, CheckBox } from 'react-native-elements'
 import React, { Component } from 'react';
-// import {CheckBox} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-export default class TodosListItem extends Component {
+
+/*
+  Styles
+*/
+import styles from '../Containers/Styles/LoginStyles';
+
+export default class TodosListItem extends React.PureComponent {
 
   getTodoState(currentState) {
     if (currentState === "complete")
@@ -17,19 +23,17 @@ export default class TodosListItem extends Component {
     let todo = this.props.todo,
     isComplete = (todo.status === "complete" ? true : false);
     return (
-        <ListItem
-          key={todo.id}
-          title={
-              <CheckBox
-                title={todo.task}
-                onPress={ () => {
-                  let updatedState = this.getTodoState(todo.status);
-                  this.props.updateTodoState(todo.id, updatedState);
-                } }
-                checked={isComplete}
-              />
-            }
+      <View key={ todo.id }>
+        <CheckBox
+          containerStyle={styles.listItemContainer}
+          title={todo.task}
+          onPress={ () => {
+            let updatedState = this.getTodoState(todo.status);
+            this.props.updateTodoState(todo.id, updatedState);
+          } }
+          checked={isComplete}
         />
+      </View>
     )
   }
 }

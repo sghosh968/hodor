@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Image, View } from 'react-native';
+import { ScrollView, Text, Image, View, Picker } from 'react-native';
 import { Images } from '../Themes';
-import { Button } from 'react-native-elements';
+import { Button, SearchBar } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {fetchTodosRequest, updateTodoStateRequest, setVisibilityFilter } from '../Redux/TodosRedux';
 import TodosList from '../Components/TodosList';
+import FlatListDemo from '../Components/FlatListDemo';
+import SelectionListDemo from '../Components/SelectionListDemo';
 import {Select, Option} from "react-native-chooser";
 import Colors from '../Themes/Colors';
 
@@ -19,11 +21,19 @@ class DashboardComponent extends Component {
   }
 
   render () {
+    console.log("State is");
+    console.log(this.state);
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
           <View>
+            <SearchBar
+              onChangeText={(text) => console.log(`text changed to ${text}`)}
+              onClearText={() => console.log('text cleared')}
+              placeholder="Search TODO item"
+              clearIcon
+            />
             <Text> Filter Todos</Text>
             <Select
               onSelect = { (selectedFilter) => this.props.setVisibilityFilter(selectedFilter) }
@@ -38,7 +48,7 @@ class DashboardComponent extends Component {
               <Option value = "incomplete">Incomplete</Option>
             </Select>
           </View>
-          <TodosList todos={this.props.todos} visibilityFilter={this.props.visibilityFilter} isLoading={this.props.isFetching} updateTodoState={this.props.updateTodoState} />
+          <SelectionListDemo todos={this.props.todos} visibilityFilter={this.props.visibilityFilter} isLoading={this.props.isFetching} updateTodoState={this.props.updateTodoState} />
         </ScrollView>
       </View>
     )
@@ -57,7 +67,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => {
   return {
     todos: state.todosData.todos,
-    visibilityFilter: state.todosData.visibilityFilter
+    visibilityFilter: state.todosData.visibilityFilter,
+    language: 'js'
   }
 }
 

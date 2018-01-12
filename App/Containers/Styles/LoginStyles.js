@@ -14,5 +14,8 @@ export default StyleSheet.create({
   },
   centered: {
     alignItems: 'center'
+  },
+  listItemContainer: {
+    margin: 0
   }
 })
