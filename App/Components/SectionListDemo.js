@@ -2,7 +2,7 @@ import { SectionList, View, Text } from 'react-native';
 import React, { Component } from 'react';
 import TodoListItem from './TodoListItem';
 
-export default class SelectionListDemo extends Component {
+export default class SectionListDemo extends Component {
   filterTodosByState(todos, currentFilter) {
     if (currentFilter === "all")
       return todos;

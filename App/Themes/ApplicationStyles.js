@@ -1,6 +1,6 @@
-import Fonts from './Fonts'
-import Metrics from './Metrics'
-import Colors from './Colors'
+import Fonts from './Fonts';
+import Metrics from './Metrics';
+import Colors from './Colors';
 
 // This file is for a reusable grouping of Theme items.
 // Similar to an XML fragment layout in Android
@@ -8,7 +8,7 @@ import Colors from './Colors'
 const ApplicationStyles = {
   screen: {
     mainContainer: {
-      flex: 1,
+      flex: 2,
       backgroundColor: Colors.c1,
       marginTop: 70
     },

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {fetchTodosRequest, updateTodoStateRequest, setVisibilityFilter } from '../Redux/TodosRedux';
 import TodosList from '../Components/TodosList';
 import FlatListDemo from '../Components/FlatListDemo';
-import SelectionListDemo from '../Components/SelectionListDemo';
+import SectionListDemo from '../Components/SectionListDemo';
 import {Select, Option} from "react-native-chooser";
 import Colors from '../Themes/Colors';
 
@@ -27,7 +27,7 @@ class DashboardComponent extends Component {
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
-          <View>
+          <View style={styles.groupContainer}>
             <SearchBar
               onChangeText={(text) => console.log(`text changed to ${text}`)}
               onClearText={() => console.log('text cleared')}
@@ -38,7 +38,6 @@ class DashboardComponent extends Component {
             <Select
               onSelect = { (selectedFilter) => this.props.setVisibilityFilter(selectedFilter) }
               selected = { this.props.visibilityFilter }
-              style = {{borderWidth : 1, borderColor : "purple"}}
               textStyle = {{}}
               backdropStyle  = {{backgroundColor : Colors.c1}}
               optionListStyle = { {backgroundColor : Colors.c1} }
@@ -48,7 +47,25 @@ class DashboardComponent extends Component {
               <Option value = "incomplete">Incomplete</Option>
             </Select>
           </View>
-          <SelectionListDemo todos={this.props.todos} visibilityFilter={this.props.visibilityFilter} isLoading={this.props.isFetching} updateTodoState={this.props.updateTodoState} />
+          <SectionListDemo
+            todos={this.props.todos}
+            visibilityFilter={this.props.visibilityFilter}
+            isLoading={this.props.isFetching}
+            updateTodoState={this.props.updateTodoState}
+            style={styles.div}
+          />
+          {
+            /*
+            <FlatListDemo
+              todos={this.props.todos}
+              visibilityFilter={this.props.visibilityFilter}
+              isLoading={this.props.isFetching}
+              updateTodoState={this.props.updateTodoState}
+              style={styles.div}
+            />
+            */
+          }
+
         </ScrollView>
       </View>
     )
