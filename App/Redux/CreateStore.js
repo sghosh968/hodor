@@ -1,51 +1,31 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { autoRehydrate } from 'redux-persist'
-import Config from '../Config/DebugConfig'
-import createSagaMiddleware from 'redux-saga'
-import RehydrationServices from '../Services/RehydrationServices'
-import ReduxPersist from '../Config/ReduxPersist'
-import ScreenTracking from './ScreenTrackingMiddleware'
-import logger from 'redux-logger'
-import thunkMiddleware from 'redux-thunk'
+import logger from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
+import Config from '../Config/DebugConfig';
+
 
 // creates the store
 export default (rootReducer) => {
   /* ------------- Redux Configuration ------------- */
 
-  const middleware = []
-  const enhancers = []
-
-  /* ------------- Analytics Middleware ------------- */
-  // middleware.push(ScreenTracking)
+  const middleware = [];
+  const enhancers = [];
 
   /* Thunk middleware */
-  middleware.push(thunkMiddleware)
+  middleware.push(thunkMiddleware);
 
   /* Logger middleware */
-  middleware.push(logger)
-
-  /* Thunk middleware */
-  // middleware.push(thunkMiddleware)
-
-
+  middleware.push(logger);
 
   /* ------------- Assemble Middleware ------------- */
 
-  enhancers.push(applyMiddleware(...middleware))
-
-  /* ------------- AutoRehydrate Enhancer ------------- */
-
-  // add the autoRehydrate enhancer
-  // if (ReduxPersist.active) {
-  //   enhancers.push(autoRehydrate())
-  // }
+  enhancers.push(applyMiddleware(...middleware));
 
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
-  const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
-  const store = createAppropriateStore(rootReducer, compose(...enhancers))
-  // const store = createAppropriateStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
+  const createAppropriateStore = createStore;
+  const store = createAppropriateStore(rootReducer, compose(...enhancers));
 
   return {
-    store
-  }
-}
+    store,
+  };
+};
