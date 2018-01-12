@@ -92,17 +92,17 @@ export function fetchTodosRequestSuccess(response) {
   };
 }
 
-/*---- Action handlers / Reducers ---- */
+/* ---- Action handlers / Reducers ---- */
 
-let initialState = {
+const initialState = {
   todos: [],
-  visibilityFilter: "all"
+  visibilityFilter: 'all'
 };
 
 export function todosReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case SET_VISIBILITY_FILTER:
-    console.log("In reducer SET_VISIBILITY_FILTER, action is: ", action);
+    console.log('In reducer SET_VISIBILITY_FILTER, action is: ', action);
     return {
       ...state,
       visibilityFilter: action.filter,
