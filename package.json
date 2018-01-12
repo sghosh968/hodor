@@ -27,6 +27,7 @@
     "apisauce": "^0.14.0",
     "change-case": "^3.0.1",
     "format-json": "^1.0.3",
+    "immutable": "^3.8.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",

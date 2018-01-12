@@ -12,14 +12,14 @@ const PrimaryNav = StackNavigator({
   MainLoginScreen: { screen: Login },
   EmailLoginScreen: { screen: EmailLogin },
   DashboardScreen: { screen: DashboardComponent },
-  SignupScreen: { screen: Signup }
+  SignupScreen: { screen: Signup },
 }, {
   // Default config for all screens
   headerMode: 'none',
   initialRouteName: 'DashboardScreen',
   navigationOptions: {
-    headerStyle: styles.header
-  }
-})
+    headerStyle: styles.header,
+  },
+});
 
-export default PrimaryNav
+export default PrimaryNav;

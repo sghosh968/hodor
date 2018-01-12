@@ -1,7 +1,6 @@
 import logger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
-import Config from '../Config/DebugConfig';
 
 
 // creates the store
